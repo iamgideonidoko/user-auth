@@ -1,5 +1,4 @@
-import { config as env } from 'dotenv';
-env();
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import axios from 'axios';
