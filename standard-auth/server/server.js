@@ -48,6 +48,7 @@ const getTokenParams = (code) => queryString.stringify({
 
 const app = express();
 
+// Resolve CORS
 app.use(cors({
   origin: [
     config.clientUrl,
@@ -55,9 +56,10 @@ app.use(cors({
   credentials: true,
 }));
 
+// Parse cookie
 app.use(cookieParser());
 
-/** auth middleware */
+// Verify auth
 const auth = (req, res, next) => {
   try {
     const token = req.cookies.token;
