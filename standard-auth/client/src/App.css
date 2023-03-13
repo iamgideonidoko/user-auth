@@ -43,8 +43,7 @@
   box-sizing: border-box;
 }
 
-.login-btn {
-  border-radius: 100rem;
+.btn { border-radius: 100rem;
   padding: 12px 16px;
   background: linear-gradient(170deg, #61DBFB, #2e849b) !important;
   width: 10rem;

@@ -66,7 +66,7 @@ const auth = (req, res, next) => {
     jwt.verify(token, config.tokenSecret);
     return next();
   } catch (err) {
-    console.error(err);
+    console.error('Error: ', err);
     res.status(401).json({ message: "Unauthorized" });
   }
 };
@@ -122,14 +122,18 @@ app.get('/auth/logged_in', (req, res) => {
   }
 });
 
-app.get("/auth/logout", (_, res) => {
+app.post("/auth/logout", (_, res) => {
   // clear cookie
   res.clearCookie('token').json({ message: 'Logged out' });
 });
 
 app.get('/user/posts', auth, async (_, res) => {
-  const posts = await axios.get(postUrl);
-  res.json({ posts });
+  try {
+    const { data } = await axios.get(config.postUrl);
+    res.json({ posts: data?.slice(0, 5) });
+  } catch (err) {
+    console.error('Error: ', err);
+  }
 });
 
 const PORT = process.env.PORT || 5000;
